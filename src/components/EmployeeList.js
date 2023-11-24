@@ -40,6 +40,8 @@ const EmployeeList = () => {
               <thead className="bg-amber-100">
                   <tr>
                       <th className="text-gray-500 font-normal text-left py-3 px-6">
+                      Id</th>
+                      <th className="text-gray-500 font-normal text-left py-3 px-6">
                       First Name</th>
                       <th className="text-gray-500 font-normal text-left py-3 px-6">Last Name</th>
                       <th className="text-gray-500 font-normal text-left py-3 px-6">Email ID</th>
@@ -50,6 +52,11 @@ const EmployeeList = () => {
               <tbody className="bg-white">
                 {employee.map((employee) => (
                   <tr>
+                    <td className="text-left px-5 py-3">
+                      <div className="text-sm">
+                      {employee.id}
+                      </div>
+                    </td>
                     <td className="text-left px-5 py-3">
                       <div className="text-sm">
                       {employee.firstName}
