@@ -12,6 +12,18 @@ class EmployeeService {
     getEmployees() {
         return axios.get(EMPLOYEE_API_URL);
     }
+
+    deleteEmployee(id) {
+        return axios.delete(EMPLOYEE_API_URL + "/" + id);
+    }
+
+    getEmployeeById(id) {
+        return axios.get(EMPLOYEE_API_URL + "/" + id);
+    }
+
+    updateEmployeeById(employee, id) {
+        return axios.put(EMPLOYEE_API_URL + "/" + id, employee);
+    }
 }
 
 export default new EmployeeService();

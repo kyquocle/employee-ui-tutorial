@@ -2,6 +2,7 @@ import { useState , useEffect} from 'react'
 import { useNavigate } from "react-router-dom"
 import EmployeeService from "../services/EmployeeService";
 import React from "react";
+import Employee from "./Employee";
 const EmployeeList = () => {
 
   const navigate = useNavigate(); 
@@ -25,6 +26,17 @@ const EmployeeList = () => {
 
   }, [])
   
+  const deleteEmployee = (e, id) => {
+    e.preventDefault();
+    EmployeeService.deleteEmployee(id)
+    .then(res => {
+      if(employee) {
+        setEmployee((prevElement) => {
+          return prevElement.filter((employee) => employee.id !== id);
+        })
+      }
+    })
+  };
 
   return (
     <>
@@ -32,7 +44,7 @@ const EmployeeList = () => {
       <div className="h-12">
           <button 
           onClick={() => navigate("/add")}
-          className="rounded bg-green-600 px-3 py-2">Add employee</button>
+          className="rounded bg-green-600 px-3 py-2 hover:bg-teal-500">Add employee</button>
       </div>
 
       <div className="flex shadow border-b">
@@ -51,32 +63,8 @@ const EmployeeList = () => {
               {!loading && (
               <tbody className="bg-white">
                 {employee.map((employee) => (
-                  <tr>
-                    <td className="text-left px-5 py-3">
-                      <div className="text-sm">
-                      {employee.id}
-                      </div>
-                    </td>
-                    <td className="text-left px-5 py-3">
-                      <div className="text-sm">
-                      {employee.firstName}
-                      </div>
-                    </td>
-                    <td className="text-left px-5 py-3">
-                      <div className="text-sm ">
-                      {employee.lastName}
-                      </div>
-                    </td>
-                    <td className="text-left px-5 py-3">
-                      <div className="text-sm">
-                      {employee.emailId}
-                      </div>
-                    </td>
-                    <td className="text-sm">
-                      <a href="/a" className="px-3 py-2 mr-3 bg-blue-500 text-white rounded">Edit</a>
-                      <a href="/e" className="px-3 py-2 bg-red-500 text-white rounded">Delete</a>
-                    </td>
-                  </tr>
+                  <Employee employee={employee} deleteEmployee={deleteEmployee} key={employee.id}></Employee>
+                  //Load data from child employee
                   ))}
 
               </tbody>

@@ -23,11 +23,22 @@ const AddEmployee = () => {
         EmployeeService.saveEmployee(employee)
         .then((respone) => {
             console.log(respone);
+            navigate("/employeeList")
         })
         .catch((err) => {
             console.log(err);
         })
         
+    }
+
+    const reset = (e) => {
+        e.preventDefault();
+        setEmployee({
+        id: "",
+        firstName: "",
+        lastName: "",   
+        emailId: ""
+    })
     }
 
   return (
@@ -75,7 +86,9 @@ const AddEmployee = () => {
             <button 
             onClick={saveEmployee}
             className="rounded bg-violet-400 hover:bg-violet-600 mt-3 px-4 py-3">Enter</button>
-            <button className="rounded bg-red-500 hover:bg-red-600 ml-3 mt-3 px-4 py-3">Clear</button>
+            <button 
+            onClick={reset}
+            className="rounded bg-red-500 hover:bg-red-600 ml-3 mt-3 px-4 py-3">Clear</button>
         </div> 
 
         
@@ -84,7 +97,7 @@ const AddEmployee = () => {
     
     </div>
     <button 
-    onClick={() => navigate("/")}
+    onClick={() => navigate("/employeeList")}
      className="bg-orange-300 px-3 py-3 ">View Employees</button>
     </>
   )
